@@ -26,11 +26,12 @@ function CreateADUser() {
     # Add the user to its appropriate group
     foreach($group_name in $userObject.$groups) {
 
-        try{
+        try {
             Get-ADGroup -Identity "$group_name"
             Add-ADGroupMember -Identity $group_name -Members $username
         }
-        catch[Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException]{
+        catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException]
+        {
             Write-Warning "User $name NOT Added to group $group_name because it does not exist"
         }
     }

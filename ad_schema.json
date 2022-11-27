@@ -1,18 +1,25 @@
 {
-    "domain":"CP1.local"
+    "domain":"CP1.local",
 
     "groups" : [
         {
-            "name":"Engineering"
+            "name":"Employees"
         }
     ],
 
     "users": [
         {
             "name":"Pranava Rao",
-            "password":"Password123",
+            "password":"P@ssw0rd123",
             "groups": [
-                "Engineering"
+                "Employees"
+            ]
+        },
+        {
+            "name":"Iron Man",
+            "password":"JarvisP@ssw0rd123",
+            "groups": [
+                "Employees"
             ]
         }
     ]
