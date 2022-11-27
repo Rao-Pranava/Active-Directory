@@ -41,7 +41,7 @@ $json = (Get-Content $JSONFile | ConvertFrom-Json)
 
 $Global:Domain = $json.domain
 
-foreach($group in $json.group){
+foreach($group in $json.groups){
     CreateADGroup $group
 }
 
