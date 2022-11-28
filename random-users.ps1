@@ -25,7 +25,7 @@ for ($i = 0; $i -lt $num_users; $i++){
     $new_user = @{
         "name"="$first_name $last_name"
         "password"="$password"
-        "groups"=@((Get-Random -InputObject $groups).name)
+        "groups"=(Get-Random -InputObject $groups).name
     }
 
     $users += $new_user
@@ -35,8 +35,8 @@ for ($i = 0; $i -lt $num_users; $i++){
     $passwords.Remove($password)
 }
 
-@{
+ConvertTo-Json -InputObject @{
     "domain"="CP1.local"
     "groups"=$groups
     "users"=$users
-} | ConvertTo-Json | Out-File $OutputJSONFile
+} | Out-File $OutputJSONFile
