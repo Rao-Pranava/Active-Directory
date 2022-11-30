@@ -1,7 +1,7 @@
 # Active Directory 🪟
  Just Automation Code wrtten for Setting-Up Users for our AD
 
-# Useage of this Code
+# Usage of this Code
 1. Clone this Repository
 ```
 git clone https://github.com/Rao-Pranava/Active-Directory.git
