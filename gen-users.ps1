@@ -47,6 +47,11 @@ function CreateADUser() {
     }
 }
 
+# Add to local admin as needed
+if ( $userObject.local_admin -eq $True){
+    net localgroup administrators $Global:Domain\$username /add
+}
+
 function RemoveADUser(){
     param( [Parameter(Mandatory=$true)] $userObject )
 
