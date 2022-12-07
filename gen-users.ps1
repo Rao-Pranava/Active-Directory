@@ -1,40 +1,40 @@
-param(
+param( 
     [Parameter(Mandatory=$true)] $JSONFile,
     [switch]$Undo
-)
+ )
 
 function CreateADGroup(){
-    param([Parameter(Mandatory=$true)] $groupObject)
+    param( [Parameter(Mandatory=$true)] $groupObject )
 
     $name = $groupObject.name
     New-ADGroup -name $name -GroupScope Global
 }
 
 function RemoveADGroup(){
-    param([Parameter(Mandatory=$true)] $groupObject)
+    param( [Parameter(Mandatory=$true)] $groupObject )
 
     $name = $groupObject.name
     Remove-ADGroup -Identity $name -Confirm:$False
 }
 
-function CreateADUser() {
-    param([Parameter(Mandatory=$true)] $userObject)
+function CreateADUser(){
+    param( [Parameter(Mandatory=$true)] $userObject )
 
-    # Pull out the name form the Json Object
+    # Pull out the name from the JSON object
     $name = $userObject.name
     $password = $userObject.password
 
     # Generate a "first initial, last name" structure for username
     $firstname, $lastname = $name.Split(" ")
     $username = ($firstname[0] + $lastname).ToLower()
-    $smAccountName = $username
+    $samAccountName = $username
     $principalname = $username
 
-    # Actually create the AD user Object
+    # Actually create the AD user object
     New-ADUser -Name "$name" -GivenName $firstname -Surname $lastname -SamAccountName $SamAccountName -UserPrincipalName $principalname@$Global:Domain -AccountPassword (ConvertTo-SecureString $password -AsPlainText -Force) -PassThru | Enable-ADAccount
 
     # Add the user to its appropriate group
-    foreach($group_name in $userObject.$groups) {
+    foreach($group_name in $userObject.groups) {
 
         try {
             Get-ADGroup -Identity "$group_name"
@@ -42,14 +42,14 @@ function CreateADUser() {
         }
         catch [Microsoft.ActiveDirectory.Management.ADIdentityNotFoundException]
         {
-            Write-Warning "User $name NOT Added to group $group_name because it does not exist"
+            Write-Warning "User $name NOT added to group $group_name because it does not exist"
         }
     }
-}
-
-# Add to local admin as needed
-if ( $userObject.local_admin -eq $True){
-    net localgroup administrators $Global:Domain\$username /add
+    
+    # Add to local admin as needed
+    if ( $userObject.local_admin -eq $True){
+        net localgroup administrators $Global:Domain\$username /add
+    }
 }
 
 function RemoveADUser(){
@@ -76,8 +76,8 @@ function StrengthenPasswordPolicy(){
     rm -force C:\Windows\Tasks\secpol.cfg -confirm:$false
 }
 
-$json = (Get-Content $JSONFile | ConvertFrom-Json)
 
+$json = ( Get-Content $JSONFile | ConvertFrom-JSON)
 $Global:Domain = $json.domain
 
 if ( -not $Undo) {
