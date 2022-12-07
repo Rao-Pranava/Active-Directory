@@ -1,5 +1,5 @@
 param(
-    [Parameter(Mandatory=$true)] $JSONFile,
+    [Parameter(Mandatory=$true)] $OutputJSONFile,
     [int]$UserCount,
     [int]$GroupCount,
     [int]$LocaAdminCount
