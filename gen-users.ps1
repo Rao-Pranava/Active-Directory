@@ -10,11 +10,11 @@ function CreateADGroup(){
     New-ADGroup -name $name -GroupScope Global
 }
 
-function RemveADGroup(){
+function RemoveADGroup(){
     param([Parameter(Mandatory=$true)] $groupObject)
 
     $name = $groupObject.name
-    Remove-ADGroup -Identity $name -Confirm:$false
+    Remove-ADGroup -Identity $name -Confirm:$False
 }
 
 function CreateADUser() {
