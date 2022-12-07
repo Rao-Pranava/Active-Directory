@@ -76,7 +76,6 @@ function StrengthenPasswordPolicy(){
     rm -force C:\Windows\Tasks\secpol.cfg -confirm:$false
 }
 
-
 $json = ( Get-Content $JSONFile | ConvertFrom-JSON)
 $Global:Domain = $json.domain
 
