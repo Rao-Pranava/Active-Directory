@@ -1,5 +1,5 @@
 # Active Directory 🪟
- Just Automation Code written for Setting-Up random users and admins for our AD.
+Just an Automation Code written for Setting-Up random users and admins for our AD.
 
 # Usage of this Code
 1. Clone this Repository.
