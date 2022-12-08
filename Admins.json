@@ -1,0 +1,36 @@
+{
+    "domain":"CP1.local",
+
+    "groups" : [
+        {
+            "name":"Admins"
+        }
+    ],
+
+    "users": [
+        {
+            "local_admin": ["Com1", "Com2", "WindowsServer22"],
+            "name":"Pranava Rao",
+            "password":"P@ssw0rd123",
+            "groups": [
+                "Admins"
+            ]
+        },
+        {
+            "local_admin": ["Com1"],
+            "name":"Iron Man",
+            "password":"JarvisP@ssw0rd123",
+            "groups": [
+                "Admins"
+            ]
+        },
+        {
+            "local_admin": ["Com2"],
+            "name":"Spider Man",
+            "password":"TonyP@ssw0rd123",
+            "groups": [
+                "Admins"
+            ]
+        }
+    ]
+}
